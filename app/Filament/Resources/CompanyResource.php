@@ -2,29 +2,30 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Models\User;
+use App\Filament\Resources\CompanyResource\Pages;
+use App\Models\Company;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Builder;
 
-class UserResource extends Resource
+class CompanyResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Company::class;
 
-    protected static ?int $navigationSort = 0;
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationGroup = 'Основни';
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $modelLabel = 'корисник';
+    protected static ?string $modelLabel = 'компанија';
 
-    protected static ?string $pluralModelLabel = 'корисници';
+    protected static ?string $pluralModelLabel = 'компании';
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-o-office-building';
 
     public static function form(Form $form): Form
     {
@@ -33,15 +34,13 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
+                Forms\Components\TextInput::make('address')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('password')
-                    ->password()
+                Forms\Components\Select::make('user_id')
                     ->required()
-                    ->maxLength(255)
-                    ->hiddenOn('edit'),
+                    ->relationship('user', 'name'),
+                Forms\Components\Checkbox::make('active'),
             ]);
     }
 
@@ -52,8 +51,14 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('Име')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->label('Е-пошта')
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Сопственик')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('address')
+                    ->label('Адреса')
+                    ->sortable(),
+                Tables\Columns\CheckboxColumn::make('active')
+                    ->label('Активна')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Креирана на')
@@ -65,7 +70,9 @@ class UserResource extends Resource
                     ->dateTime(),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('active')
+                    ->label('Активни')
+                    ->query(fn (Builder $query) => $query->where('active', true)),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -79,7 +86,7 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageUsers::route('/'),
+            'index' => Pages\ManageCompanies::route('/'),
         ];
     }
 }

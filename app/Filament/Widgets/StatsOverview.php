@@ -2,12 +2,18 @@
 
 namespace App\Filament\Widgets;
 
+use App\Enums\UserType;
 use App\Models\Company;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Card;
 
 class StatsOverview extends BaseWidget
 {
+    public static function canView(): bool
+    {
+        return auth()->user()->type->value === UserType::ADMIN->value;
+    }
+
     protected function getCards(): array
     {
         return [

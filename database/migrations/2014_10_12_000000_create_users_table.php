@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->unsignedTinyInteger('type')->default(UserType::COMPANY->value);
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -30,8 +30,12 @@ class UserPolicy
         return $user->type->value === UserType::ADMIN->value;
     }
 
-    public function delete(User $user): bool
+    public function delete(User $user, User $beingDeleted): bool
     {
+        if ($beingDeleted->type->value === UserType::ADMIN->value) {
+            return false;
+        }
+
         return $user->type->value === UserType::ADMIN->value;
     }
 

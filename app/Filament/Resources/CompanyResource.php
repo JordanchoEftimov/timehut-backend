@@ -50,13 +50,12 @@ class CompanyResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Име')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('Сопственик')
-                    ->sortable(),
+                    ->label('Сопственик'),
                 Tables\Columns\TextColumn::make('address')
-                    ->label('Адреса')
-                    ->sortable(),
+                    ->label('Адреса'),
                 Tables\Columns\CheckboxColumn::make('active')
                     ->label('Активна')
                     ->sortable(),

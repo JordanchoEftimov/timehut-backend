@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('address');
             $table->date('employment_date');
             $table->foreignId('company_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

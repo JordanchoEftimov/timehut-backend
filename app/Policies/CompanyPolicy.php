@@ -35,6 +35,11 @@ class CompanyPolicy
         return $user->type->value === UserType::ADMIN->value;
     }
 
+    public function deleteAny(User $user): bool
+    {
+        return $user->type->value === UserType::ADMIN->value;
+    }
+
     public function restore(User $user): bool
     {
         return $user->type->value === UserType::ADMIN->value;

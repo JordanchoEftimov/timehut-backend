@@ -43,6 +43,7 @@ class EmployeeResource extends Resource
                 Forms\Components\TextInput::make('email')
                     ->label('Е-пошта')
                     ->email()
+                    ->unique()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('address')
                     ->label('Адреса')

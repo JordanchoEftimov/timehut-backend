@@ -32,17 +32,20 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Име'),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
                     ->unique(table: User::class)
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Е-пошта'),
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required()
                     ->maxLength(255)
-                    ->hiddenOn('edit'),
+                    ->hiddenOn('edit')
+                    ->label('Лозинка'),
             ]);
     }
 

@@ -33,14 +33,18 @@ class CompanyResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Име'),
                 Forms\Components\TextInput::make('address')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Адреса'),
                 Forms\Components\Select::make('user_id')
                     ->required()
-                    ->relationship('user', 'name'),
-                Forms\Components\Checkbox::make('active'),
+                    ->relationship('user', 'name')
+                    ->label('Сопственик'),
+                Forms\Components\Checkbox::make('active')
+                    ->label('Активна'),
             ]);
     }
 

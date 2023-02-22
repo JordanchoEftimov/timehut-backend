@@ -4,33 +4,50 @@ namespace App\Filament\Widgets;
 
 use App\Enums\UserType;
 use App\Models\Company;
-use Filament\Widgets\PieChartWidget;
+use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
-class CompaniesChart extends PieChartWidget
+class CompaniesChart extends ApexChartWidget
 {
-    protected static ?string $heading = 'Компании';
-
-    protected static ?string $maxHeight = '200px';
-
     public static function canView(): bool
     {
         return auth()->user()->type->value === UserType::ADMIN->value;
     }
 
-    protected function getData(): array
+    /**
+     * Chart Id
+     *
+     * @var string
+     */
+    protected static string $chartId = 'Компании';
+
+    /**
+     * Widget Title
+     *
+     * @var string|null
+     */
+    protected static ?string $heading = 'Компании';
+
+    /**
+     * Chart options (series, labels, types, size, animations...)
+     * https://apexcharts.com/docs/options
+     *
+     * @return array
+     */
+    protected function getOptions(): array
     {
         return [
-            'datasets' => [
-                [
-                    'label' => 'Комапнии',
-                    'data' => [Company::query()->where('active', true)->count(), Company::query()->where('active', false)->count()],
-                    'backgroundColor' => [
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 99, 132)',
-                    ],
+            'chart' => [
+                'type' => 'pie',
+                'height' => 300,
+            ],
+            'series' => [Company::query()->where('active', true)->count(), Company::query()->where('active', false)->count()],
+            'labels' => ['Активни компании', 'Неактивни компании'],
+            'legend' => [
+                'labels' => [
+                    'colors' => '#9ca3af',
+                    'fontWeight' => 600,
                 ],
             ],
-            'labels' => ['Активни компании', 'Неактивни компании'],
         ];
     }
 }

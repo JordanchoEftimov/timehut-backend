@@ -23,4 +23,9 @@ class Company extends Model
     {
         return $this->hasMany(Employee::class);
     }
+
+    public function scopeIsActive($query)
+    {
+        return $query->where('active', true);
+    }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7419407bcadb913b8a6f40d963bf1d8c",
+    "content-hash": "bdbd8df7dcb60e3aeb3f3aab5f17cf07",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -73,6 +73,77 @@
                 "source": "https://github.com/akaunting/laravel-money/tree/3.1.2"
             },
             "time": "2022-07-27T08:16:36+00:00"
+        },
+        {
+            "name": "awcodes/filament-quick-create",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/awcodes/filament-quick-create.git",
+                "reference": "a4bf2896a4babd4f98d1eb58e35b2b4ccc682879"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/awcodes/filament-quick-create/zipball/a4bf2896a4babd4f98d1eb58e35b2b4ccc682879",
+                "reference": "a4bf2896a4babd4f98d1eb58e35b2b4ccc682879",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.0",
+                "illuminate/contracts": "^9.0|^10.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.9.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^6.0|^7.0",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^7.0|^8.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "pestphp/pest-plugin-livewire": "^1.0",
+                "pestphp/pest-plugin-parallel": "^0.3",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.5|^10.0",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "FilamentQuickCreate\\FilamentQuickCreateServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FilamentQuickCreate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Weston",
+                    "email": "awcodes1@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Plugin for Filament Admin that adds a dropdown menu to the header to quickly create new items.",
+            "keywords": [
+                "filament",
+                "framework",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/awcodes/filament-quick-create/issues",
+                "source": "https://github.com/awcodes/filament-quick-create/tree/v2.1.0"
+            },
+            "time": "2023-02-16T14:50:32+00:00"
         },
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -3439,6 +3510,67 @@
             "time": "2023-01-23T16:14:59+00:00"
         },
         {
+            "name": "pxlrbt/filament-spotlight",
+            "version": "v0.3.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pxlrbt/filament-spotlight.git",
+                "reference": "76df24fbd3566a033e72fff10fea46c1f7aac3a3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pxlrbt/filament-spotlight/zipball/76df24fbd3566a033e72fff10fea46c1f7aac3a3",
+                "reference": "76df24fbd3566a033e72fff10fea46c1f7aac3a3",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.14.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.11",
+                "wire-elements/spotlight": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "pxlrbt\\FilamentSpotlight\\FilamentSpotlightServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "pxlrbt\\FilamentSpotlight\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dennis Koch",
+                    "email": "info@pixelarbeit.de"
+                }
+            ],
+            "description": "Spotlight for Filament Admin",
+            "keywords": [
+                "alfred",
+                "filament",
+                "laravel",
+                "laravel-filament",
+                "spotlight",
+                "wire-elements"
+            ],
+            "support": {
+                "issues": "https://github.com/pxlrbt/filament-spotlight/issues",
+                "source": "https://github.com/pxlrbt/filament-spotlight/tree/v0.3.6"
+            },
+            "time": "2022-11-30T08:12:47+00:00"
+        },
+        {
             "name": "ralouphie/getallheaders",
             "version": "3.0.3",
             "source": {
@@ -6379,6 +6511,80 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wire-elements/spotlight",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wire-elements/spotlight.git",
+                "reference": "0bfae0f27c4d4616be0ed011e339540925951b54"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wire-elements/spotlight/zipball/0bfae0f27c4d4616be0ed011e339540925951b54",
+                "reference": "0bfae0f27c4d4616be0ed011e339540925951b54",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^8.0|^9.0|^10.0",
+                "livewire/livewire": "^2.4",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.4.3"
+            },
+            "require-dev": {
+                "brianium/paratest": "^6.2",
+                "nunomaduro/collision": "^5.3",
+                "orchestra/testbench": "^6.15|^7.0|^8.0",
+                "phpunit/phpunit": "^9.3",
+                "vimeo/psalm": "^4.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LivewireUI\\Spotlight\\SpotlightServiceProvider"
+                    ],
+                    "aliases": {
+                        "Spotlight": "LivewireUI\\Spotlight\\SpotlightFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LivewireUI\\Spotlight\\": "src",
+                    "LivewireUI\\Spotlight\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philo Hermans",
+                    "email": "me@philohermans.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Livewire component that provides Spotlight/Alfred-like functionality to your Laravel application.",
+            "homepage": "https://github.com/livewire-ui/spotlight",
+            "keywords": [
+                "laravel",
+                "livewire-ui",
+                "spotlight"
+            ],
+            "support": {
+                "issues": "https://github.com/wire-elements/spotlight/issues",
+                "source": "https://github.com/wire-elements/spotlight/tree/1.0.7"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/livewire-ui",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-02T11:19:30+00:00"
         }
     ],
     "packages-dev": [
@@ -9221,8 +9427,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0.2"
+        "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }

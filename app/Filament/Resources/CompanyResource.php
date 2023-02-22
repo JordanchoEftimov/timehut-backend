@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CompanyResource\Pages;
 use App\Models\Company;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -33,16 +34,21 @@ class CompanyResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255)
                     ->label('Име'),
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->unique(table: User::class)
+                    ->required()
+                    ->label('Е-пошта'),
+                Forms\Components\TextInput::make('password')
+                    ->password()
+                    ->required()
+                    ->hiddenOn('edit')
+                    ->label('Лозинка'),
                 Forms\Components\TextInput::make('address')
                     ->required()
                     ->maxLength(255)
                     ->label('Адреса'),
-                Forms\Components\Select::make('user_id')
-                    ->required()
-                    ->relationship('user', 'name')
-                    ->label('Сопственик'),
                 Forms\Components\Checkbox::make('active')
                     ->label('Активна'),
             ]);
@@ -56,8 +62,8 @@ class CompanyResource extends Resource
                     ->label('Име')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->label('Сопственик'),
+                Tables\Columns\TextColumn::make('user.email')
+                    ->label('Е-пошта'),
                 Tables\Columns\TextColumn::make('address')
                     ->label('Адреса'),
                 Tables\Columns\CheckboxColumn::make('active')
@@ -75,14 +81,13 @@ class CompanyResource extends Resource
             ->filters([
                 Tables\Filters\Filter::make('active')
                     ->label('Активни')
-                    ->query(fn (Builder $query) => $query->where('active', true)),
+                    ->query(fn (Builder $query) => $query->isActive()),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+
             ]);
     }
 

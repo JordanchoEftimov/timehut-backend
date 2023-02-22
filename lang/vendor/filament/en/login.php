@@ -16,6 +16,10 @@ return [
 
     'fields' => [
 
+        'username' => [
+            'label' => 'Username',
+        ],
+
         'email' => [
             'label' => 'Email address',
         ],

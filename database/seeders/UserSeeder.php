@@ -80,8 +80,8 @@ class UserSeeder extends Seeder
                         'end_at' => Carbon::now()->addDays(2)->addHours(8)->addMinutes(20),
                     ],
                     [
-                        'start_at' => Carbon::now()->addDays(3),
-                        'end_at' => Carbon::now()->addDays(3)->addHours(8)->addSeconds(40),
+                        'start_at' => Carbon::now()->addDays(10),
+                        'end_at' => Carbon::now()->addDays(10)->addHours(8)->addSeconds(40),
                     ],
                 ])->each(function ($shift) use ($employee) {
                     $shift = new Shift($shift);

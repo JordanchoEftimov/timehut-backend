@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Enums\UserType;
 use App\Models\Company;
 use App\Models\Employee;
+use App\Models\Shift;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
 
         if (! app()->isProduction()) {
             DB::transaction(function () {
+                // company
                 $user = User::query()
                     ->create([
                         'name' => 'Company',
@@ -43,6 +45,7 @@ class UserSeeder extends Seeder
                 $company->user()->associate($user->id);
                 $company->save();
 
+                // employee
                 $user = User::query()
                     ->create([
                         'name' => 'Employee',
@@ -61,6 +64,30 @@ class UserSeeder extends Seeder
                 $employee->user()->associate($user->id);
                 $employee->company()->associate($company->id);
                 $employee->save();
+
+                // shift
+                collect([
+                    [
+                        'start_at' => Carbon::now(),
+                        'end_at' => Carbon::now()->addHours(8),
+                    ],
+                    [
+                        'start_at' => Carbon::now()->addDay(),
+                        'end_at' => Carbon::now()->addDay()->addHours(8),
+                    ],
+                    [
+                        'start_at' => Carbon::now()->addDays(2),
+                        'end_at' => Carbon::now()->addDays(2)->addHours(8)->addMinutes(20),
+                    ],
+                    [
+                        'start_at' => Carbon::now()->addDays(3),
+                        'end_at' => Carbon::now()->addDays(3)->addHours(8)->addSeconds(40),
+                    ],
+                ])->each(function ($shift) use ($employee) {
+                    $shift = new Shift($shift);
+                    $shift->employee()->associate($employee->id);
+                    $shift->save();
+                });
             });
         }
     }

@@ -34,7 +34,9 @@ class Employee extends Model
         parent::boot();
 
         self::creating(function (Employee $employee) {
-            $employee->company_id = auth()->user()->company->id;
+            if (auth()->check()) {
+                $employee->company_id = auth()->user()->company->id;
+            }
         });
     }
 }

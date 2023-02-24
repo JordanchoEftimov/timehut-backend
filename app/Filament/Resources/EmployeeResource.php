@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\EmployeeResource\Pages;
 use App\Models\Employee;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -42,9 +43,14 @@ class EmployeeResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
                     ->label('Е-пошта')
+                    ->required()
                     ->email()
-                    ->unique()
+                    ->unique(table: User::class)
                     ->maxLength(255),
+                Forms\Components\TextInput::make('password')
+                    ->label('Лозинка')
+                    ->password()
+                    ->required(),
                 Forms\Components\TextInput::make('address')
                     ->label('Адреса')
                     ->required()

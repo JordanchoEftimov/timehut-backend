@@ -12,11 +12,16 @@ class Employee extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'surname', 'phone', 'address', 'employment_date', 'company_id', 'email'];
+    protected $fillable = ['name', 'surname', 'phone', 'address', 'employment_date', 'company_id', 'email', 'user_id'];
 
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function scopeFromAuthCompany($query)

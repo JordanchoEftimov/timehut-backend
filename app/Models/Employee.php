@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -38,6 +39,14 @@ class Employee extends Model
     public function scopeFromAuthCompany($query)
     {
         return $query->where('company_id', auth()->user()->company->id);
+    }
+
+    public function totalWorkingHours(): Attribute
+    {
+        return Attribute::get(function () {
+            $total = $this->shifts()->selectRaw('SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_at, start_at)))) as total_working_hours')->value('total_working_hours');
+            return $total;
+        });
     }
 
     protected static function boot()

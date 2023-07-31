@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Enums\UserType;
 use App\Models\Company;
 use App\Models\Employee;
+use App\Models\Salary;
 use App\Models\Shift;
 use App\Models\User;
 use Carbon\Carbon;
@@ -87,6 +88,34 @@ class UserSeeder extends Seeder
                     $shift = new Shift($shift);
                     $shift->employee()->associate($employee->id);
                     $shift->save();
+                });
+
+                // salaries
+                collect([
+                    [
+                        'month' => 1,
+                        'payment' => 20000,
+                    ],
+                    [
+                        'month' => 2,
+                        'payment' => 21000,
+                    ],
+                    [
+                        'month' => 3,
+                        'payment' => 22000,
+                    ],
+                    [
+                        'month' => 4,
+                        'payment' => 20000,
+                    ],
+                    [
+                        'month' => 6,
+                        'payment' => 20000,
+                    ],
+                ])->each(function ($salary) use ($employee) {
+                    $salary = new Salary($salary);
+                    $salary->employee()->associate($employee->id);
+                    $salary->save();
                 });
             });
         }

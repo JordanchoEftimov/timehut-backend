@@ -30,6 +30,11 @@ class Employee extends Model
         return $this->hasMany(Shift::class);
     }
 
+    public function salaries(): HasMany
+    {
+        return $this->hasMany(Salary::class);
+    }
+
     public function scopeFromAuthCompany($query)
     {
         return $query->where('company_id', auth()->user()->company->id);

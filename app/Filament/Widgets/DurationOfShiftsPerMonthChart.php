@@ -2,12 +2,18 @@
 
 namespace App\Filament\Widgets;
 
+use App\Enums\UserType;
 use App\Models\Shift;
 use Carbon\Carbon;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 class DurationOfShiftsPerMonthChart extends ApexChartWidget
 {
+    public static function canView(): bool
+    {
+        return auth()->user()->type->value === UserType::EMPLOYEE->value;
+    }
+
     /**
      * Chart Id
      *
@@ -42,7 +48,11 @@ class DurationOfShiftsPerMonthChart extends ApexChartWidget
             $start->addMonth();
         }
 
-        $totalDurationsPerMonth = Shift::selectRaw('YEAR(start_at) year, MONTH(start_at) month, ROUND(SUM(TIME_TO_SEC(TIMEDIFF(end_at, start_at))) / 3600, 0) total_duration')
+        $loggedInEmployeeId = auth()->user()->employee->id;
+
+        $totalDurationsPerMonth = Shift::join('employees', 'shifts.employee_id', '=', 'employees.id')
+            ->selectRaw('YEAR(shifts.start_at) AS year, MONTH(shifts.start_at) AS month, ROUND(SUM(TIME_TO_SEC(TIMEDIFF(shifts.end_at, shifts.start_at))) / 3600, 0) AS total_duration')
+            ->where('employees.id', $loggedInEmployeeId)
             ->groupBy('year', 'month')
             ->orderBy('month', 'asc')
             ->get();

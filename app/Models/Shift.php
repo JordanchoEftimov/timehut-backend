@@ -40,4 +40,9 @@ class Shift extends Model
             return $this->start_at->translatedFormat('l');
         });
     }
+
+    public function scopeForLoggedInEmployee($query)
+    {
+        return $query->where('employee_id', auth()->user()->employee->id);
+    }
 }

@@ -7,6 +7,7 @@ use App\Models\Shift;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Builder;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class ShiftResource extends Resource
@@ -46,6 +47,11 @@ class ShiftResource extends Resource
             ->bulkActions([
                 ExportBulkAction::make()
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->forLoggedInEmployee();
     }
 
     public static function getPages(): array

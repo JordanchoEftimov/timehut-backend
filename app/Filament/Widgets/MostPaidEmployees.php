@@ -10,9 +10,9 @@ use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
-class MostHardworkingEmployees extends BaseWidget
+class MostPaidEmployees extends BaseWidget
 {
-    protected static ?string $heading = 'Највредни вработени';
+    protected static ?string $heading = 'Најплатени вработени';
 
     public static function canView(): bool
     {
@@ -22,9 +22,9 @@ class MostHardworkingEmployees extends BaseWidget
     protected function getTableQuery(): Builder
     {
         return Employee::query()
-            ->whereHas('shifts')
-            ->select('*', DB::raw('(SELECT SUM(TIME_TO_SEC(TIMEDIFF(end_at, start_at))) FROM shifts WHERE employee_id = employees.id) as total_working_seconds'))
-            ->orderByDesc('total_working_seconds');
+            ->whereHas('salaries')
+            ->select('employees.*', DB::raw('(SELECT SUM(payment) FROM salaries WHERE employee_id = employees.id) as total_salary'))
+            ->orderByDesc('total_salary');
     }
 
     protected function getTableColumns(): array
@@ -34,8 +34,8 @@ class MostHardworkingEmployees extends BaseWidget
                 ->label('Име'),
             Tables\Columns\TextColumn::make('surname')
                 ->label('Презиме'),
-            Tables\Columns\TextColumn::make('total_working_hours')
-                ->label('Работни часови'),
+            Tables\Columns\TextColumn::make('total_salary')
+                ->label('Вкупно плата'),
         ];
     }
 }

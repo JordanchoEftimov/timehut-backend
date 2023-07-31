@@ -49,6 +49,13 @@ class Employee extends Model
         });
     }
 
+    public function totalSalary(): Attribute
+    {
+        return Attribute::get(function () {
+            return $this->salaries()->sum('payment');
+        });
+    }
+
     protected static function boot()
     {
         parent::boot();

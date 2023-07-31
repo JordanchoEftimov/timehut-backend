@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "leandrocfe/filament-apex-charts": "^1.0",
+        "marjose123/filament-lockscreen": "^1.2",
         "pxlrbt/filament-excel": "^1.1",
         "pxlrbt/filament-spotlight": "^0.3.6"
     },

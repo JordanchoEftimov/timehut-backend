@@ -76,7 +76,7 @@ class DurationOfShiftsPerMonthChart extends ApexChartWidget
             'series' => [
                 [
                     'name' => 'Работни часови по месец',
-                    'data' => $data->pluck('total_duration')
+                    'data' => $data->pluck('total_duration'),
                 ],
             ],
             'xaxis' => [

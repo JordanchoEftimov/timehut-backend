@@ -45,7 +45,7 @@ class ShiftResource extends Resource
                 //
             ])
             ->bulkActions([
-                ExportBulkAction::make()
+                ExportBulkAction::make(),
             ]);
     }
 

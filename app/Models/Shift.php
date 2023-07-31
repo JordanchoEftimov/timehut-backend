@@ -37,6 +37,7 @@ class Shift extends Model
     {
         return Attribute::get(function () {
             Carbon::setLocale('mk');
+
             return $this->start_at->translatedFormat('l');
         });
     }

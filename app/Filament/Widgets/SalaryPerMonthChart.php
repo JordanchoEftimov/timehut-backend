@@ -31,7 +31,7 @@ class SalaryPerMonthChart extends LineChartWidget
                 [
                     'label' => 'Плати по месец',
                     'data' => $this->getSalariesForMonths($salaries),
-                    'backgroundColor' => 'blue'
+                    'backgroundColor' => 'blue',
                 ],
             ],
             'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -44,6 +44,7 @@ class SalaryPerMonthChart extends LineChartWidget
         for ($month = 1; $month <= 12; $month++) {
             $data[] = isset($salaries[$month]) ? $salaries[$month] : 0;
         }
+
         return $data;
     }
 }

@@ -19,7 +19,7 @@ class RegisteredEmployeesStatsOverview extends BaseWidget
         return [
             Card::make('Регистрирани вработени', Employee::query()->fromAuthCompany()->count())
                 ->description('Број на регистрирани вработени на Timehut')
-                ->descriptionIcon('heroicon-o-office-building')
+                ->descriptionIcon('heroicon-o-building-office')
                 ->descriptionColor('warning')
                 ->chart([7, 2, 10, 3, 15, 4, 17]),
         ];

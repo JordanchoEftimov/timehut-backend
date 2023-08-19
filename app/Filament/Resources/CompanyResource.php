@@ -6,10 +6,10 @@ use App\Filament\Resources\CompanyResource\Pages;
 use App\Models\Company;
 use App\Models\User;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
 class CompanyResource extends Resource
@@ -26,7 +26,7 @@ class CompanyResource extends Resource
 
     protected static ?string $pluralModelLabel = 'компании';
 
-    protected static ?string $navigationIcon = 'heroicon-o-office-building';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
     public static function form(Form $form): Form
     {

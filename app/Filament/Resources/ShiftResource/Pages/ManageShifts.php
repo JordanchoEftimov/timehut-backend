@@ -9,7 +9,7 @@ class ManageShifts extends ManageRecords
 {
     protected static string $resource = ShiftResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             //

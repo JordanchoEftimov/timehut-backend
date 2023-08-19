@@ -9,7 +9,7 @@ class ManageSalaries extends ManageRecords
 {
     protected static string $resource = SalaryResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
 

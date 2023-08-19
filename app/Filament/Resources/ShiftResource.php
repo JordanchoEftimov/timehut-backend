@@ -5,10 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ShiftResource\Pages;
 use App\Models\Shift;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class ShiftResource extends Resource
 {
@@ -45,7 +44,7 @@ class ShiftResource extends Resource
                 //
             ])
             ->bulkActions([
-                ExportBulkAction::make(),
+                //
             ]);
     }
 

@@ -5,10 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\SalaryResource\Pages;
 use App\Models\Salary;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class SalaryResource extends Resource
 {
@@ -33,10 +32,10 @@ class SalaryResource extends Resource
                 //
             ])
             ->actions([
-
+                //
             ])
             ->bulkActions([
-                ExportBulkAction::make(),
+                //
             ]);
     }
 

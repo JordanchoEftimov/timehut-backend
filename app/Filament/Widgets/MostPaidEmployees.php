@@ -4,7 +4,6 @@ namespace App\Filament\Widgets;
 
 use App\Enums\UserType;
 use App\Models\Employee;
-use Closure;
 use Filament\Tables;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Database\Eloquent\Builder;

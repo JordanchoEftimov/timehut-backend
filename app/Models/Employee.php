@@ -45,6 +45,7 @@ class Employee extends Model
     {
         return Attribute::get(function () {
             $total = $this->shifts()->selectRaw('SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_at, start_at)))) as total_working_hours')->value('total_working_hours');
+
             return $total;
         });
     }

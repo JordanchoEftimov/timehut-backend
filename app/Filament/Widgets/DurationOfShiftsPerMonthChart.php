@@ -16,23 +16,17 @@ class DurationOfShiftsPerMonthChart extends ApexChartWidget
 
     /**
      * Chart Id
-     *
-     * @var string
      */
     protected static string $chartId = 'DurationOfShiftsPerMonthChart';
 
     /**
      * Widget Title
-     *
-     * @var string|null
      */
     protected static ?string $heading = 'Работни часови по месец';
 
     /**
      * Chart options (series, labels, types, size, animations...)
      * https://apexcharts.com/docs/options
-     *
-     * @return array
      */
     protected function getOptions(): array
     {

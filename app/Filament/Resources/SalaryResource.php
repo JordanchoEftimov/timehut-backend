@@ -24,7 +24,9 @@ class SalaryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('payment')
-                    ->label('Износ'),
+                    ->label('Износ')
+                    ->numeric()
+                    ->prefix('ден.'),
                 Tables\Columns\TextColumn::make('month_name')
                     ->label('Месец'),
             ])

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->foreignId('user_id')->constrained();
             $table->boolean('active')->default(true);
+            $table->string('avatar_url')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -24,11 +24,13 @@ class ShiftController extends Controller
         return JsonResource::make($shift);
     }
 
-    public function endShift(Request $request): JsonResource
+    public function endShift(Shift $shift, Request $request): JsonResource
     {
-        $shiftId = $request->get('shift_id');
-        $shift = Shift::query()
-            ->firstWhere('id', $shiftId);
+        $employeeId = $request->user()->employee_id;
+
+        // If the user trying to end the shift is not the shift owner, prevent it
+        abort_if($shift->employee_id !== $employeeId, 403);
+
         $shift->end_at = now();
         $shift->save();
 

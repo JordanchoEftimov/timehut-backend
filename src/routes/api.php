@@ -22,6 +22,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::name('shift.')->prefix('/shift')->group(function () {
         Route::post('/start', [ShiftController::class, 'startShift'])->name('start');
-        Route::post('/end', [ShiftController::class, 'endShift'])->name('end');
+        Route::post('/end/{shift}', [ShiftController::class, 'endShift'])->name('end');
     });
 });

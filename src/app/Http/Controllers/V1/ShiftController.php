@@ -33,6 +33,7 @@ class ShiftController extends Controller
     public function endShift(Employee $employee, Shift $shift): JsonResource
     {
         $this->authorize('endShift', $shift);
+        abort_if(! $shift->is_active, 403);
 
         $shift->end_at = now();
         $shift->save();

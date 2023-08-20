@@ -84,3 +84,17 @@ it('can end shift if the user started it', function () {
 
     $response->assertOk();
 });
+
+it('cannot end shift that is not active', function () {
+    $user = User::factory()->has(Employee::factory())->create();
+    Sanctum::actingAs($user);
+    $employee = Employee::query()->firstWhere('user_id', $user->id);
+    $startedShift = $this->postJson(route('v1.shifts.start', $employee));
+
+    $shift = Shift::query()->firstWhere('id', $startedShift->json()['data']['id']);
+    $this->postJson(route('v1.shifts.end', ['employee' => $employee, 'shift' => $shift]));
+
+    $response = $this->postJson(route('v1.shifts.end', ['employee' => $employee, 'shift' => $shift]));
+
+    $response->assertForbidden();
+});

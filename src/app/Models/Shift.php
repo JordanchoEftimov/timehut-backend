@@ -15,7 +15,7 @@ class Shift extends Model
 
     protected $fillable = ['start_at', 'end_at'];
 
-    protected $appends = ['duration'];
+    protected $appends = ['duration', 'is_active'];
 
     public $timestamps = false;
 
@@ -37,6 +37,11 @@ class Shift extends Model
     public function duration(): Attribute
     {
         return Attribute::get(fn () => $this->start_at->diff($this->end_at)->format('%H:%I:%S'));
+    }
+
+    public function isActive(): Attribute
+    {
+        return Attribute::get(fn () => $this->start_at && ! $this->end_at);
     }
 
     public function day(): Attribute

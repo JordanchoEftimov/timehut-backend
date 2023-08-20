@@ -127,4 +127,4 @@ admin
 - [Livewire Documentation](https://laravel-livewire.com/docs/2.x/)
 - [Heroicons](https://heroicons.com/)
 - [Node.js](https://nodejs.org/)
-Composer: https://getcomposer.org/
+- [Composer](https://getcomposer.org/)

@@ -35,7 +35,7 @@ Timehut is built using a modern technology stack to ensure stability, security, 
 
 - **PHP - Filament v3**: Filament is a Laravel-based admin panel generator that simplifies the creation of tables, forms, and other admin-related tasks. Version 3 provides enhanced functionality.
 
-- **Livewire**: Livewire is a Laravel package for building interactive user interfaces. It enables real-time interactions without the need for complex JavaScript.
+- **Livewire v3**: Livewire is a Laravel package for building interactive user interfaces. It enables real-time interactions without the need for complex JavaScript.
 
 - **Heroicons**: Heroicons is a set of free, MIT-licensed high-quality SVG icons for you to use in your web projects.
 

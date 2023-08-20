@@ -27,6 +27,10 @@ class SalaryResource extends Resource
                     ->label('Нето износ')
                     ->numeric()
                     ->prefix('ден.'),
+                Tables\Columns\TextColumn::make('gross_payment')
+                    ->label('Бруто износ')
+                    ->numeric()
+                    ->prefix('ден.'),
                 Tables\Columns\TextColumn::make('month_name')
                     ->label('Месец'),
             ])

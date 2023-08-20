@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\NetToGross;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +25,10 @@ class Employee extends Model
         'email',
         'user_id',
         'net_salary',
+    ];
+
+    protected $appends = [
+        'gross_salary',
     ];
 
     public function company(): BelongsTo
@@ -62,9 +67,12 @@ class Employee extends Model
 
     public function totalSalary(): Attribute
     {
-        return Attribute::get(function () {
-            return $this->salaries()->sum('payment');
-        });
+        return Attribute::get(fn () => $this->salaries()->sum('net_payment'));
+    }
+
+    public function grossSalary(): Attribute
+    {
+        return Attribute::get(fn () => NetToGross::netToGross($this->net_salary));
     }
 
     protected static function boot()

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\NetToGross;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,38 +14,33 @@ class Salary extends Model
 
     protected $fillable = ['net_payment', 'month', 'employee_id'];
 
+    protected $appends = [
+        'month_name',
+        'gross_payment',
+    ];
+
     public function monthName(): Attribute
     {
-        return Attribute::get(function () {
-            switch ($this->month) {
-                case 1:
-                    return 'Јануари';
-                case 2:
-                    return 'Февруари';
-                case 3:
-                    return 'Март';
-                case 4:
-                    return 'Април';
-                case 5:
-                    return 'Мај';
-                case 6:
-                    return 'Јуни';
-                case 7:
-                    return 'Јули';
-                case 8:
-                    return 'Август';
-                case 9:
-                    return 'Септември';
-                case 10:
-                    return 'Октомври';
-                case 11:
-                    return 'Ноември';
-                case 12:
-                    return 'Декември';
-                default:
-                    return 'Непознато';
-            }
+        return Attribute::get(fn () => match ($this->month) {
+            1 => 'Јануари',
+            2 => 'Февруари',
+            3 => 'Март',
+            4 => 'Април',
+            5 => 'Мај',
+            6 => 'Јуни',
+            7 => 'Јули',
+            8 => 'Август',
+            9 => 'Септември',
+            10 => 'Октомври',
+            11 => 'Ноември',
+            12 => 'Декември',
+            default => 'Непознато',
         });
+    }
+
+    public function grossPayment(): Attribute
+    {
+        return Attribute::get(fn () => NetToGross::netToGross($this->net_payment));
     }
 
     public function employee(): BelongsTo

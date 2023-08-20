@@ -86,6 +86,10 @@ class EmployeeResource extends Resource
                     ->label('Основна нето плата')
                     ->numeric()
                     ->prefix('ден.'),
+                Tables\Columns\TextColumn::make('gross_salary')
+                    ->label('Основна бруто плата')
+                    ->numeric()
+                    ->prefix('ден.'),
                 Tables\Columns\TextColumn::make('employment_date')
                     ->date()
                     ->label('Датум на вработување')

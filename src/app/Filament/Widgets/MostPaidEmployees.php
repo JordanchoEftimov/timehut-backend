@@ -22,7 +22,7 @@ class MostPaidEmployees extends BaseWidget
     {
         return Employee::query()
             ->whereHas('salaries')
-            ->select('employees.*', DB::raw('(SELECT SUM(payment) FROM salaries WHERE employee_id = employees.id) as total_salary'))
+            ->select('employees.*', DB::raw('(SELECT SUM(net_payment) FROM salaries WHERE employee_id = employees.id) as total_salary'))
             ->orderByDesc('total_salary');
     }
 
@@ -34,6 +34,8 @@ class MostPaidEmployees extends BaseWidget
             Tables\Columns\TextColumn::make('surname')
                 ->label('Презиме'),
             Tables\Columns\TextColumn::make('total_salary')
+                ->numeric()
+                ->prefix('ден.')
                 ->label('Вкупно плата'),
         ];
     }

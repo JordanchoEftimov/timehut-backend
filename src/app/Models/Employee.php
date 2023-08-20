@@ -14,7 +14,17 @@ class Employee extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'surname', 'phone', 'address', 'employment_date', 'company_id', 'email', 'user_id'];
+    protected $fillable = [
+        'name',
+        'surname',
+        'phone',
+        'address',
+        'employment_date',
+        'company_id',
+        'email',
+        'user_id',
+        'net_salary',
+    ];
 
     public function company(): BelongsTo
     {

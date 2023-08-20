@@ -58,6 +58,10 @@ class EmployeeResource extends Resource
                 Forms\Components\DatePicker::make('employment_date')
                     ->label('Датум на вработување')
                     ->required(),
+                Forms\Components\TextInput::make('net_salary')
+                    ->label('Основна нето плата')
+                    ->numeric()
+                    ->prefix('ден.'),
             ]);
     }
 
@@ -78,6 +82,10 @@ class EmployeeResource extends Resource
                     ->label('Е-пошта'),
                 Tables\Columns\TextColumn::make('address')
                     ->label('Адреса'),
+                Tables\Columns\TextColumn::make('net_salary')
+                    ->label('Основна нето плата')
+                    ->numeric()
+                    ->prefix('ден.'),
                 Tables\Columns\TextColumn::make('employment_date')
                     ->date()
                     ->label('Датум на вработување')

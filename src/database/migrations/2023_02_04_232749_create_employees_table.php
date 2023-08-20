@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('email')->nullable()->unique();
             $table->string('address');
             $table->date('employment_date');
+            $table->unsignedInteger('net_salary');
             $table->foreignId('company_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->softDeletes();

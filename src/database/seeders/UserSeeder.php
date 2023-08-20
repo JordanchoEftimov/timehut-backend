@@ -61,6 +61,7 @@ class UserSeeder extends Seeder
                     'email' => 'employee@gmail.com',
                     'address' => 'Address',
                     'employment_date' => Carbon::now(),
+                    'net_salary' => 21000,
                 ]);
                 $employee->user()->associate($user->id);
                 $employee->company()->associate($company->id);

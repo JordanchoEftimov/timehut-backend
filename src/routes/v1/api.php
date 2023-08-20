@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ShiftController;
+use App\Http\Controllers\V1\ShiftController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

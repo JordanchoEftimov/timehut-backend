@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\ShiftResource;
 use App\Models\Employee;
 use App\Models\Shift;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ShiftController extends Controller
@@ -14,14 +15,9 @@ class ShiftController extends Controller
     /**
      * @throws AuthorizationException
      */
-    public function startShift(Request $request): JsonResource
+    public function startShift(Employee $employee): JsonResource
     {
         $this->authorize('startShift', Shift::class);
-
-        $employeeId = $request->user()->employee_id;
-
-        $employee = Employee::query()
-            ->firstWhere('id', $employeeId);
 
         $shift = new Shift();
         $shift->start_at = now();
@@ -34,13 +30,26 @@ class ShiftController extends Controller
     /**
      * @throws AuthorizationException
      */
-    public function endShift(Shift $shift, Request $request): JsonResource
+    public function endShift(Employee $employee, Shift $shift): JsonResource
     {
-        $this->authorize('endShift', Shift::class);
+        $this->authorize('endShift', $shift);
 
         $shift->end_at = now();
         $shift->save();
 
         return JsonResource::make($shift);
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function getShifts(Employee $employee): AnonymousResourceCollection
+    {
+        abort_if($employee->user_id !== auth()->id(), 403);
+
+        $shifts = $employee->shifts()
+            ->paginate(10);
+
+        return ShiftResource::collection($shifts);
     }
 }

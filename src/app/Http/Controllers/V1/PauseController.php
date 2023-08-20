@@ -22,7 +22,7 @@ class PauseController extends Controller
 
     public function endPause(Employee $employee, Shift $shift, Pause $pause): JsonResource
     {
-        abort_if($employee->user_id !== auth()->id, 403);
+        abort_if($employee->user_id !== auth()->id(), 403);
         abort_if($shift->employee_id !== $employee->id, 403);
         abort_if($pause->shift_id !== $shift->id, 403);
         abort_if(! $pause->is_active, 403);

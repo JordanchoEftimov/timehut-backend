@@ -25,8 +25,8 @@ class EmployeeFactory extends Factory
             'address' => fake()->address,
             'employment_date' => fake()->dateTime,
             'email' => fake()->email,
-            'company_id' => Company::query()->first(),
-            'user_id' => User::query()->first(),
+            'company_id' => Company::query()->inRandomOrder()->first(),
+            'user_id' => User::query()->inRandomOrder()->first(),
         ];
     }
 }

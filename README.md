@@ -39,6 +39,8 @@ Timehut is built using a modern technology stack to ensure stability, security, 
 
 - **Heroicons**: Heroicons is a set of free, MIT-licensed high-quality SVG icons for you to use in your web projects.
 
+- **PHP - PEST:** Pest is a testing framework with a focus on simplicity, meticulously designed to bring back the joy of testing in PHP.
+
 ### 4. Installation Guide
 To set up Timehut on your local machine, follow these steps:
 #### 4.1 Prerequisites
@@ -128,3 +130,4 @@ admin
 - [Heroicons](https://heroicons.com/)
 - [Node.js](https://nodejs.org/)
 - [Composer](https://getcomposer.org/)
+- [Pest](https://pestphp.com/)

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShiftController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::name('shift.')->prefix('/shift')->group(function () {
-        Route::post('/start')->name('start');
-        Route::post('/end')->name('end');
+        Route::post('/start', [ShiftController::class, 'startShift'])->name('start');
+        Route::post('/end', [ShiftController::class, 'endShift'])->name('end');
     });
 });

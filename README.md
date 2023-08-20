@@ -1,66 +1,130 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Project Documentation: Timehut - Employee Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+### Table of contents
+
+1. [Introduction](#introduction)
+2. [Project Overview](#project-overview)
+3. [Technology Stack](#technology-stack)
+4. [Installation Guide](#installation-guide)
+5. [Usage Guide](#usage-guide)
+8. [References](#references)
+
+### 1. Introduction
+<p>
+    Welcome to the documentation for Timehut, an Employee Management System designed to assist companies in efficiently managing their employees, tracking working hours, and calculating salaries. This documentation provides a comprehensive guide on how to set up and use the Timehut system.
 </p>
 
-## About Laravel
+### 2. Project Overview
+#### 2.1 Purpose
+<p>
+    Timehut aims to streamline employee management processes for businesses of all sizes. It provides an intuitive web-based interface for administrators to create and manage employee profiles, assign shifts, track attendance, and calculate salaries.
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+#### 2.2. Features
+Key features of Timehut include:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Employee Management: Create and manage employee profiles, including personal information and job details.
+- Shift Scheduling: Assign shifts to employees and track their working hours.
+- Salary Calculation: Automatically calculate employee salaries based on hours worked.
+- User-Friendly Interface: A user-friendly web interface powered by Laravel, Filament, Livewire, and Heroicons.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 3. Technology Stack
+Timehut is built using a modern technology stack to ensure stability, security, and scalability. The core technologies used in this project are:
 
-## Learning Laravel
+- **PHP - Laravel 10**: Laravel is a popular PHP framework known for its elegant syntax and robust features. Version 10 offers improved performance and security.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **PHP - Filament v3**: Filament is a Laravel-based admin panel generator that simplifies the creation of tables, forms, and other admin-related tasks. Version 3 provides enhanced functionality.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Livewire**: Livewire is a Laravel package for building interactive user interfaces. It enables real-time interactions without the need for complex JavaScript.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Heroicons**: Heroicons is a set of free, MIT-licensed high-quality SVG icons for you to use in your web projects.
 
-## Laravel Sponsors
+### 4. Installation Guide
+To set up Timehut on your local machine, follow these steps:
+#### 4.1 Prerequisites
+Before you begin, make sure you have the following installed:
+- **PHP**: Ensure that you have PHP installed, preferably version 8 or higher.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- **Composer**: Composer is a dependency manager for PHP. Install it by following the instructions on the official website.
 
-### Premium Partners
+- **Node.js and NPM**: Node.js is required for managing JavaScript dependencies. Install both Node.js and NPM from the official website.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- **Database**: Set up a local database system (e.g., MySQL, PostgreSQL) and have the necessary credentials ready.
 
-## Contributing
+  #### 4.2 Installation Steps
+  1. Clone the project repository from GitHub:
+```bash
+git clone https://github.com/TimehutMk/timehut-backend.git
+```
+  2. Open the project using your preferred IDE (e.g., PHPStorm, Visual Studio Code).
+  3. Navigate to the project directory in your terminal and run the following commands:
+```bash
+npm install
+composer install
+```
+  4. Create a .env file by copying the provided example:
+```bash
+cp .env.example .env
+```
+  5. Generate the application key:
+```bash
+php artisan key:generate
+```
+  6. Configure your .env file with the appropriate database connection details:
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_database_username
+DB_PASSWORD=your_database_password
+```
+  7. Migrate and seed the database:
+```bash
+php artisan migrate --seed
+```
+  8. Start the Laravel development server:
+```bash
+php artisan serve
+```
+  9. Compile the frontend assets:
+```bash
+npm run dev
+```
+  10. Access the Timehut application in your web browser at `http://localhost:8000` or `http://127.0.0.1:8000`.
+  11. Log in to the admin panel with the provided credentials.
+```bash
+admin@gmail.com
+```
+```bash
+admin
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 5. Usage Guide
+#### 5.1 Admin Panel
+<p>
+    The admin panel provides access to all the features of Timehut. Here are some common tasks:
+</p>
 
-## Code of Conduct
+- **Employee Management**: Create, edit, or delete employee profiles.
+- **Shift Scheduling**: Track their working hours.
+- **Salary Calculation**: The system will automatically calculate salaries based on hours worked.
+- **User Management**: Manage admin users and their permissions.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+  #### 5.2 Employee Portal
+<p>
+    In addition to the admin panel, Timehut provides an employee portal where employees can:
+</p>
 
-## Security Vulnerabilities
+- View their assigned shifts.
+- Check their working hours.
+- Access salary information.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 8. References
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- [Laravel Documentation](https://laravel.com/docs/10)
+- [Filament Documentation](https://docs.filamentadmin.com/v3/)
+- [Livewire Documentation](https://laravel-livewire.com/docs/2.x/)
+- [Heroicons](https://heroicons.com/)
+- [Node.js](https://nodejs.org/)
+Composer: https://getcomposer.org/

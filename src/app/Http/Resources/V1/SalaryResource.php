@@ -15,7 +15,7 @@ class SalaryResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'payment' => $this->payment,
+            'net_payment' => $this->net_payment,
             'month' => $this->month,
         ];
     }

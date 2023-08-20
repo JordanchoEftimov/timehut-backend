@@ -23,8 +23,8 @@ class SalaryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('payment')
-                    ->label('Износ')
+                Tables\Columns\TextColumn::make('net_payment')
+                    ->label('Нето износ')
                     ->numeric()
                     ->prefix('ден.'),
                 Tables\Columns\TextColumn::make('month_name')

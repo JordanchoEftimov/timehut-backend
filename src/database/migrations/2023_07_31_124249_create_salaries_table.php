@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('salaries', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('payment');
+            $table->unsignedInteger('net_payment');
             $table->unsignedTinyInteger('month');
             $table->foreignId('employee_id');
             $table->timestamps();

@@ -95,23 +95,23 @@ class UserSeeder extends Seeder
                 collect([
                     [
                         'month' => 1,
-                        'payment' => 20000,
+                        'net_payment' => 20000,
                     ],
                     [
                         'month' => 2,
-                        'payment' => 21000,
+                        'net_payment' => 21000,
                     ],
                     [
                         'month' => 3,
-                        'payment' => 22000,
+                        'net_payment' => 22000,
                     ],
                     [
                         'month' => 4,
-                        'payment' => 20000,
+                        'net_payment' => 20000,
                     ],
                     [
                         'month' => 6,
-                        'payment' => 20000,
+                        'net_payment' => 20000,
                     ],
                 ])->each(function ($salary) use ($employee) {
                     $salary = new Salary($salary);

@@ -11,7 +11,7 @@ class Salary extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['payment', 'month', 'employee_id'];
+    protected $fillable = ['net_payment', 'month', 'employee_id'];
 
     public function monthName(): Attribute
     {

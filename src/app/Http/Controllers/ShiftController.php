@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Shift;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ShiftController extends Controller
 {
+    /**
+     * @throws AuthorizationException
+     */
     public function startShift(Request $request): JsonResource
     {
+        $this->authorize('startShift', Shift::class);
+
         $employeeId = $request->user()->employee_id;
 
         $employee = Employee::query()
@@ -24,12 +30,12 @@ class ShiftController extends Controller
         return JsonResource::make($shift);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function endShift(Shift $shift, Request $request): JsonResource
     {
-        $employeeId = $request->user()->employee_id;
-
-        // If the user trying to end the shift is not the shift owner, prevent it
-        abort_if($shift->employee_id !== $employeeId, 403);
+        $this->authorize('endShift', Shift::class);
 
         $shift->end_at = now();
         $shift->save();

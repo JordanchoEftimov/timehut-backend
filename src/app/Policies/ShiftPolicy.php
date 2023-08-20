@@ -54,4 +54,19 @@ class ShiftPolicy
     {
         return false;
     }
+
+    // start and end shift policies
+    public function startShift(User $user): bool
+    {
+        return $user->type->value === UserType::EMPLOYEE->value;
+    }
+
+    public function endShift(User $user, Shift $shift): bool
+    {
+        if ($shift->employee_id !== $user->employee->id) {
+            return false;
+        }
+
+        return $user->type->value === UserType::EMPLOYEE->value;
+    }
 }

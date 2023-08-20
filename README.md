@@ -2,12 +2,12 @@
 
 ### Table of contents
 
-1. [Introduction](#introduction)
-2. [Project Overview](#project-overview)
-3. [Technology Stack](#technology-stack)
-4. [Installation Guide](#installation-guide)
-5. [Usage Guide](#usage-guide)
-8. [References](#references)
+1. [Introduction](#1-introduction)
+2. [Project Overview](#2-project-overview)
+3. [Technology Stack](#3-technology-stack)
+4. [Installation Guide](#4-installation-guide)
+5. [Usage Guide](#5-usage-guide)
+8. [References](#6-references)
 
 ### 1. Introduction
 <p>
@@ -120,7 +120,7 @@ admin
 - Check their working hours.
 - Access salary information.
 
-### 8. References
+### 6. References
 
 - [Laravel Documentation](https://laravel.com/docs/10)
 - [Filament Documentation](https://docs.filamentadmin.com/v3/)

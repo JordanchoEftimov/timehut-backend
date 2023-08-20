@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\V1\AuthController;
+use App\Http\Controllers\V1\SalaryController;
 use App\Http\Controllers\V1\ShiftController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,5 +30,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/start', [ShiftController::class, 'startShift'])->name('start');
         Route::post('/end/{shift}', [ShiftController::class, 'endShift'])->name('end');
         Route::get('/', [ShiftController::class, 'getShifts'])->name('get');
+    });
+
+    Route::name('salaries.')->prefix('/{employee}/salaries')->group(function () {
+        Route::get('/', [SalaryController::class, 'getSalaries'])->name('get');
     });
 });

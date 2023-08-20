@@ -17,6 +17,8 @@ class Shift extends Model
 
     protected $appends = ['duration'];
 
+    public $timestamps = false;
+
     protected $casts = [
         'start_at' => 'datetime',
         'end_at' => 'datetime',

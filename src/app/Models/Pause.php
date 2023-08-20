@@ -15,6 +15,8 @@ class Pause extends Model
         'end_at',
     ];
 
+    public $timestamps = false;
+
     public function shift(): BelongsTo
     {
         return $this->belongsTo(Shift::class);

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->dateTime('start_at');
             $table->dateTime('end_at')->nullable();
             $table->foreignId('shift_id')->constrained();
-            $table->timestamps();
         });
     }
 

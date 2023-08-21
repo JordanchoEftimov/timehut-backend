@@ -12,7 +12,7 @@ class Setting extends Model
 {
     use HasFactory, HasCaching;
 
-    protected $fillable = ['value'];
+    protected $fillable = ['value', 'key', 'description', 'company_id'];
 
     public $timestamps = false;
 
@@ -22,7 +22,7 @@ class Setting extends Model
         [
             'key' => self::PAYMENT_DATE_OF_MONTH_KEY,
             'description' => 'Датум од месецот за пресметка на плата',
-            'value' => '21',
+            'value' => '1',
         ],
     ];
 

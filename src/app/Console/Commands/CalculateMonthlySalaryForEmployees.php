@@ -48,7 +48,7 @@ class CalculateMonthlySalaryForEmployees extends Command
                 Salary::query()->create([
                     'employee_id' => $employee->id,
                     'net_payment' => $netPayment,
-                    'month' => date('m'),
+                    'month' => intval(date('m')) - 1,
                 ]);
             }
         }

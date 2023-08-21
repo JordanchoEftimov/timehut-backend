@@ -29,6 +29,7 @@ class SettingResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('value')
+                    ->label('Вредност')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -39,8 +40,10 @@ class SettingResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('description')
+                    ->label('Опис')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('value')
+                    ->label('Вредност')
                     ->searchable(),
             ])
             ->filters([

@@ -27,6 +27,7 @@ class EmployeeFactory extends Factory
             'email' => fake()->email,
             'company_id' => Company::query()->inRandomOrder()->first(),
             'user_id' => User::query()->inRandomOrder()->first(),
+            'net_salary' => fake()->numberBetween(20000, 30000),
         ];
     }
 }

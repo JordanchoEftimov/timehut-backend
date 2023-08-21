@@ -15,7 +15,11 @@ class Setting extends Model
     public $timestamps = false;
 
     const settings = [
-
+        [
+            'key' => 'payment_date_of_month',
+            'description' => 'Датум од месецот за пресметка на плата',
+            'value' => '1',
+        ],
     ];
 
     public static function getValue($key)

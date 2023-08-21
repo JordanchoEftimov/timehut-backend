@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\NetToGross;
+use App\Notifications\SalaryPaidNotification;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -51,5 +52,17 @@ class Salary extends Model
     public function scopeForLoggedInEmployee($query)
     {
         return $query->where('employee_id', auth()->user()->employee->id);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::created(function (Salary $salary) {
+            $employee = Employee::query()
+                ->firstWhere('id', $salary->employee_id);
+            $user = $employee->user;
+            $user->notify(new SalaryPaidNotification($salary));
+        });
     }
 }

@@ -31,6 +31,11 @@ class Setting extends Model
         return $this->belongsTo(Company::class);
     }
 
+    public function scopeFromAuthCompany($query)
+    {
+        return $query->where('company_id', auth()->user()->company->id);
+    }
+
     public static function getValue($key)
     {
         $s = Setting::query()

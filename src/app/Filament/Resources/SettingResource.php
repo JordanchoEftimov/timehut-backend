@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class SettingResource extends Resource
 {
@@ -58,6 +59,11 @@ class SettingResource extends Resource
             ->emptyStateActions([
                 //
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->fromAuthCompany();
     }
 
     public static function getPages(): array

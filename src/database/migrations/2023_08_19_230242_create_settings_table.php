@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('key');
             $table->string('description');
             $table->string('value');
+
+            $table->foreignId('company_id')->constrained();
         });
     }
 

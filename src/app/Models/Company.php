@@ -24,8 +24,24 @@ class Company extends Model
         return $this->hasMany(Employee::class);
     }
 
+    public function settings(): HasMany
+    {
+        return $this->hasMany(Setting::class);
+    }
+
     public function scopeIsActive($query)
     {
         return $query->where('active', true);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::created(function (Company $company) {
+            foreach (Setting::SETTINGS as $setting) {
+                Setting::create($setting, $company->id);
+            }
+        });
     }
 }

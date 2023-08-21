@@ -37,7 +37,8 @@ class ManageCompanies extends ManageRecords
                         ->schema([
                             FileUpload::make('avatar_url')
                                 ->image()
-                                ->imageEditor(),
+                                ->imageEditor()
+                                ->label('Аватар'),
                             TextInput::make('name')
                                 ->required()
                                 ->label('Име'),

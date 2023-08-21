@@ -14,6 +14,10 @@ class Setting extends Model
 
     public $timestamps = false;
 
+    const settings = [
+
+    ];
+
     public static function getValue($key)
     {
         $settings = Setting::getAllCached();

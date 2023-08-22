@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Notifications\AbsenceRequestApprovedNotification;
+use App\Notifications\AbsenceRequestDeniedNotification;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -37,6 +39,22 @@ class AbsenceStatus extends Model
             1 => 'Одобрено',
             0 => 'Одбиено',
             default => 'Непрегледано',
+        });
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::updated(function (AbsenceStatus $absenceStatus) {
+            $user = $absenceStatus->absenceRequest->employee->user;
+            if ($absenceStatus->isDirty('is_approved')) {
+                if ($absenceStatus->is_approved) {
+                    $user->notify(new AbsenceRequestApprovedNotification($absenceStatus->absenceRequest));
+                } else {
+                    $user->notify(new AbsenceRequestDeniedNotification($absenceStatus->absenceRequest));
+                }
+            }
         });
     }
 }

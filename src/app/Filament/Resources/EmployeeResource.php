@@ -61,6 +61,7 @@ class EmployeeResource extends Resource
                 Forms\Components\TextInput::make('net_salary')
                     ->label('Основна нето плата')
                     ->numeric()
+                    ->required()
                     ->prefix('ден.'),
             ]);
     }

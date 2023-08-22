@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,6 +19,10 @@ class AbsenceRequest extends Model
         'employee_id',
     ];
 
+    protected $appends = [
+        'status_name',
+    ];
+
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
@@ -31,6 +36,15 @@ class AbsenceRequest extends Model
     public function scopeFromAuthEmployee($query)
     {
         return $query->where('employee_id', auth()->user()->employee->id);
+    }
+
+    public function statusName(): Attribute
+    {
+        return Attribute::get(fn () => match ($this->absenceStatus->is_approved) {
+            1 => 'Одобрено',
+            0 => 'Одбиено',
+            default => 'Непрегледано',
+        });
     }
 
     protected static function boot()

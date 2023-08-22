@@ -46,8 +46,16 @@ class AbsenceStatusResource extends Resource
                 Tables\Columns\TextColumn::make('absenceRequest.employee.name')
                     ->label('Вработен')
                     ->sortable(),
-                Tables\Columns\IconColumn::make('Статус')
-                    ->boolean(),
+                Tables\Columns\TextColumn::make('absenceRequest.reason')
+                    ->label('Причина'),
+                Tables\Columns\TextColumn::make('status_name')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Одобрено' => 'success',
+                        'Одбиено' => 'danger',
+                        'Непрегледано' => 'gray',
+                    })
+                    ->label('Статус'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

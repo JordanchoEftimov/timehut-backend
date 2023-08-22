@@ -53,6 +53,14 @@ class AbsenceRequestResource extends Resource
                     ->label('Отсуство до')
                     ->date()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('status_name')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Одобрено' => 'success',
+                        'Одбиено' => 'danger',
+                        'Непрегледано' => 'gray',
+                    })
+                    ->label('Статус'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

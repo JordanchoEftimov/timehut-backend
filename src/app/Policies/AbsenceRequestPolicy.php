@@ -32,11 +32,7 @@ class AbsenceRequestPolicy
 
     public function update(User $user, AbsenceRequest $absenceRequest): bool
     {
-        if ($absenceRequest->employee_id !== $user->employee->id) {
-            return false;
-        }
-
-        return $user->type->value === UserType::EMPLOYEE->value;
+        return false;
     }
 
     public function delete(User $user): bool

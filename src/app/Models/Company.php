@@ -29,6 +29,11 @@ class Company extends Model
         return $this->hasMany(Setting::class);
     }
 
+    public function absenceStatuses(): HasMany
+    {
+        return $this->hasMany(AbsenceStatus::class);
+    }
+
     public function scopeIsActive($query)
     {
         return $query->where('active', true);

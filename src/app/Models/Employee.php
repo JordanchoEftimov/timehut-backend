@@ -25,10 +25,12 @@ class Employee extends Model
         'email',
         'user_id',
         'net_salary',
+        'previous_work_months',
     ];
 
     protected $appends = [
         'gross_salary',
+        'previous_work_months_additional_payment',
     ];
 
     public function company(): BelongsTo
@@ -63,11 +65,12 @@ class Employee extends Model
 
     public function totalWorkingHours(): Attribute
     {
-        return Attribute::get(function () {
-            $total = $this->shifts()->selectRaw('SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_at, start_at)))) as total_working_hours')->value('total_working_hours');
+        return Attribute::get(fn () => $this->shifts()->selectRaw('SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_at, start_at)))) as total_working_hours')->value('total_working_hours'));
+    }
 
-            return $total;
-        });
+    public function previousWorkMonthsAdditionalPayment(): Attribute
+    {
+        return Attribute::get(fn () => $this->net_salary * (round($this->previous_work_months / 12) * 0.05));
     }
 
     public function totalSalary(): Attribute

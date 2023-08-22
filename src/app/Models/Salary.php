@@ -18,6 +18,12 @@ class Salary extends Model
     protected $appends = [
         'month_name',
         'gross_payment',
+        'previous_work_months_additional_payment',
+        'contribution_for_mandatory_social_security',
+        'contribution_for_compulsory_health_insurance',
+        'unemployment_insurance_contribution',
+        'additional_contribution_for_mandatory_insurance_in_case_of_injury_or_occupational_disease',
+        'personal_income_tax',
     ];
 
     public function monthName(): Attribute
@@ -44,6 +50,36 @@ class Salary extends Model
         return Attribute::get(fn () => NetToGross::netToGross($this->net_payment));
     }
 
+    public function previousWorkMonthsAdditionalPayment(): Attribute
+    {
+        return Attribute::get(fn () => $this->employee->net_salary * (round($this->employee->previous_work_months / 12) * 0.005));
+    }
+
+    public function contributionForMandatorySocialSecurity(): Attribute
+    {
+        return Attribute::get(fn () => NetToGross::calculateContributionForMandatorySocialSecurity($this->net_payment));
+    }
+
+    public function contributionForCompulsoryHealthInsurance(): Attribute
+    {
+        return Attribute::get(fn () => NetToGross::calculateContributionForCompulsoryHealthInsurance($this->net_payment));
+    }
+
+    public function unemploymentInsuranceContribution(): Attribute
+    {
+        return Attribute::get(fn () => NetToGross::calculateUnemploymentInsuranceContribution($this->net_payment));
+    }
+
+    public function additionalContributionForMandatoryInsuranceInCaseOfInjuryOrOccupationalDisease(): Attribute
+    {
+        return Attribute::get(fn () => NetToGross::calculateAdditionalContributionForMandatoryInsuranceInCaseOfInjuryOrOccupationalDisease($this->net_payment));
+    }
+
+    public function personalIncomeTax(): Attribute
+    {
+        return Attribute::get(fn () => NetToGross::calculatePersonalIncomeTax($this->net_payment));
+    }
+
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
@@ -54,7 +90,7 @@ class Salary extends Model
         return $query->where('employee_id', auth()->user()->employee->id);
     }
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 

@@ -50,6 +50,9 @@ class CalculateMonthlySalaryForEmployees extends Command
                     'net_payment' => $netPayment,
                     'month' => intval(date('m')) - 1,
                 ]);
+                $prevMonths = $employee->previous_work_months;
+                $employee->previous_work_months = $prevMonths + 1;
+                $employee->save();
             }
         }
 

@@ -62,6 +62,7 @@ class UserSeeder extends Seeder
                     'address' => 'Address',
                     'employment_date' => Carbon::now(),
                     'net_salary' => 21000,
+                    'previous_work_months' => 12,
                 ]);
                 $employee->user()->associate($user->id);
                 $employee->company()->associate($company->id);

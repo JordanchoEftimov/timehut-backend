@@ -63,6 +63,10 @@ class EmployeeResource extends Resource
                     ->numeric()
                     ->required()
                     ->prefix('ден.'),
+                Forms\Components\TextInput::make('previous_work_months')
+                    ->label('Минат труд во месеци')
+                    ->numeric()
+                    ->required(),
             ]);
     }
 

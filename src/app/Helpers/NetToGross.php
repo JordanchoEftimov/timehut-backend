@@ -14,6 +14,14 @@ class NetToGross
 
     const ADDITIONAL_CONTRIBUTION_FOR_MANDATORY_INSURANCE_IN_CASE_OF_INJURY_OR_OCCUPATIONAL_DISEASE_PERCENTAGE = 0.005;
 
+    const OVERTIME_WORK_PERCENTAGE = 1.35;
+
+    const HOLIDAYS_PERCENTAGE = 1.5;
+
+    const NIGHT_SHIFT_PERCENTAGE = 0.35;
+
+    const WEEKEND_PERCENTAGE = 0.35;
+
     public static function netToGross($net): float
     {
         $grossWithoutContributions = self::calculateGrossWithoutContributions($net);

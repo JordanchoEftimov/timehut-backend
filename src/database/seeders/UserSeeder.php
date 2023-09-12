@@ -71,20 +71,20 @@ class UserSeeder extends Seeder
                 // shift
                 collect([
                     [
-                        'start_at' => Carbon::now(),
-                        'end_at' => Carbon::now()->addHours(8),
+                        'start_at' => Carbon::now()->subMonth(),
+                        'end_at' => Carbon::now()->subMonth()->addHours(8),
                     ],
                     [
-                        'start_at' => Carbon::now()->addDay(),
-                        'end_at' => Carbon::now()->addDay()->addHours(8),
+                        'start_at' => Carbon::now()->subMonth()->addDay(),
+                        'end_at' => Carbon::now()->subMonth()->addDay()->addHours(8),
                     ],
                     [
-                        'start_at' => Carbon::now()->addDays(2),
-                        'end_at' => Carbon::now()->addDays(2)->addHours(8)->addMinutes(20),
+                        'start_at' => Carbon::now()->subMonth()->addDays(2),
+                        'end_at' => Carbon::now()->subMonth()->addDays(2)->addHours(8)->addMinutes(20),
                     ],
                     [
-                        'start_at' => Carbon::now()->addDays(10),
-                        'end_at' => Carbon::now()->addDays(10)->addHours(8)->addSeconds(40),
+                        'start_at' => Carbon::now()->subMonth()->addDays(10),
+                        'end_at' => Carbon::now()->subMonth()->addDays(10)->addHours(8)->addSeconds(40),
                     ],
                 ])->each(function ($shift) use ($employee) {
                     $shift = new Shift($shift);

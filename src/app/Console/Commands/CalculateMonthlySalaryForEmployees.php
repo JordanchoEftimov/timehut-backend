@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use App\Models\Salary;
 use App\Models\Setting;
+use App\Models\Shift;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class CalculateMonthlySalaryForEmployees extends Command
@@ -42,12 +44,37 @@ class CalculateMonthlySalaryForEmployees extends Command
             $companies->push($setting->company);
         }
 
+        $this->info('Calculating salaries for '.count($companies).' companies');
+
         foreach ($companies as $company) {
-            foreach ($company->employees as $employee) {
-                $netPayment = $employee->net_salary;
+            // Get the selected employees for the current company
+            $selectedEmployees = $company->employees;
+
+            // Calculate the start and end date for the previous month
+            $currentDate = Carbon::now();
+            $startDate = $currentDate->copy()->subMonth()->startOfMonth();
+            $endDate = $currentDate->copy()->subMonth()->endOfMonth();
+
+            $shifts = Shift::query()->whereBetween('start_at', [$startDate, $endDate])
+                ->whereIn('employee_id', $selectedEmployees->pluck('id'))
+                ->get();
+
+            foreach ($selectedEmployees as $employee) {
+                $totalHoursWorked = 0;
+
+                foreach ($shifts->where('employee_id', $employee->id) as $shift) {
+                    $timeParts = explode(':', $shift->duration);
+
+                    $hours = (int) $timeParts[0];
+                    $totalHoursWorked += $hours;
+                }
+
+                $hourlyRate = $employee->net_salary / 160;
+                $monthlySalary = $totalHoursWorked * $hourlyRate;
+
                 Salary::query()->create([
                     'employee_id' => $employee->id,
-                    'net_payment' => $netPayment,
+                    'net_payment' => $monthlySalary,
                     'month' => intval(date('m')) - 1,
                 ]);
                 $prevMonths = $employee->previous_work_months;

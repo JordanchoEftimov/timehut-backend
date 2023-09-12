@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EmployeeResource\Pages;
+use App\Filament\Resources\EmployeeResource\RelationManagers\SalariesRelationManager;
+use App\Filament\Resources\EmployeeResource\RelationManagers\ShiftsRelationManager;
 use App\Models\Employee;
 use App\Models\User;
 use Filament\Forms;
@@ -105,6 +107,8 @@ class EmployeeResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Види'),
             ])
             ->bulkActions([
                 //
@@ -116,10 +120,19 @@ class EmployeeResource extends Resource
         return parent::getEloquentQuery()->fromAuthCompany();
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            ShiftsRelationManager::class,
+            SalariesRelationManager::class,
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageEmployees::route('/'),
+            'view' => Pages\ViewEmployee::route('/{record}'),
         ];
     }
 }

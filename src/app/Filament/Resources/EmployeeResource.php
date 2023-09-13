@@ -85,7 +85,7 @@ class EmployeeResource extends Resource
                 Tables\Columns\TextColumn::make('phone')
                     ->label('Тел. број')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email')
+                Tables\Columns\TextColumn::make('user.email')
                     ->label('Е-пошта'),
                 Tables\Columns\TextColumn::make('address')
                     ->label('Адреса'),

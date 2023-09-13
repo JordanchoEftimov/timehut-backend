@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('phone');
-            $table->string('email')->nullable()->unique();
             $table->string('address');
             $table->date('employment_date');
             $table->unsignedInteger('net_salary');

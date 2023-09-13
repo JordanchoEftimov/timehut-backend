@@ -21,6 +21,7 @@ class SalaryPerMonthChart extends LineChartWidget
         $currentYear = Carbon::now()->year;
         $salaries = Salary::selectRaw('IFNULL(SUM(net_payment), 0) as total_payment, month')
             ->whereYear('created_at', $currentYear)
+            ->where('employee_id', auth()->user()->employee->id)
             ->groupBy('month')
             ->orderBy('month')
             ->pluck('total_payment', 'month')

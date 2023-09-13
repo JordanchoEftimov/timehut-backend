@@ -22,7 +22,6 @@ class Employee extends Model
         'address',
         'employment_date',
         'company_id',
-        'email',
         'user_id',
         'net_salary',
         'previous_work_months',

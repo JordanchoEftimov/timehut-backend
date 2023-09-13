@@ -64,7 +64,6 @@ class UserSeeder extends Seeder
                             'name' => $name[0],
                             'surname' => $name[1],
                             'phone' => fake()->phoneNumber,
-                            'email' => fake()->email,
                             'address' => fake()->address,
                             'employment_date' => Carbon::now(),
                             'net_salary' => fake()->numberBetween(20000, 30000),

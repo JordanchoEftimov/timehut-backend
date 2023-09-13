@@ -31,94 +31,91 @@ class UserSeeder extends Seeder
 
         if (! app()->isProduction()) {
             DB::transaction(function () {
-                // company
-                $user = User::query()
-                    ->create([
-                        'name' => 'Company',
-                        'email' => 'company@gmail.com',
-                        'password' => 'admin',
-                        'type' => UserType::COMPANY->value,
+                // create 100 companies
+                for ($i = 0; $i < 20; $i++) {
+                    $user = User::query()
+                        ->create([
+                            'name' => fake()->name,
+                            'email' => fake()->email,
+                            'password' => 'admin',
+                            'type' => UserType::COMPANY->value,
+                        ]);
+                    $company = new Company([
+                        'name' => fake()->name,
+                        'address' => fake()->address,
                     ]);
-                $company = new Company([
-                    'name' => 'Company',
-                    'address' => 'Address',
-                ]);
-                $company->user()->associate($user->id);
-                $company->save();
+                    $company->user()->associate($user->id);
+                    $company->save();
+                }
 
-                // employee
-                $user = User::query()
-                    ->create([
-                        'name' => 'Employee',
-                        'email' => 'employee@gmail.com',
-                        'password' => 'admin',
-                        'type' => UserType::EMPLOYEE->value,
-                    ]);
-                $employee = new Employee([
-                    'name' => 'Employee',
-                    'surname' => 'Surname',
-                    'phone' => '077123123',
-                    'email' => 'employee@gmail.com',
-                    'address' => 'Address',
-                    'employment_date' => Carbon::now(),
-                    'net_salary' => 21000,
-                    'previous_work_months' => 12,
-                ]);
-                $employee->user()->associate($user->id);
-                $employee->company()->associate($company->id);
-                $employee->save();
+                // create 10 employees per company
+                $companies = Company::all();
+                foreach ($companies as $company) {
+                    for ($i = 0; $i < 20; $i++) {
+                        $user = User::query()
+                            ->create([
+                                'name' => fake()->name,
+                                'email' => fake()->email,
+                                'password' => 'admin',
+                                'type' => UserType::EMPLOYEE->value,
+                            ]);
+                        $name = explode(' ', fake()->name);
+                        $employee = new Employee([
+                            'name' => $name[0],
+                            'surname' => $name[1],
+                            'phone' => fake()->phoneNumber,
+                            'email' => fake()->email,
+                            'address' => fake()->address,
+                            'employment_date' => Carbon::now(),
+                            'net_salary' => fake()->numberBetween(20000, 30000),
+                            'previous_work_months' => fake()->numberBetween(0, 96),
+                        ]);
+                        $employee->user()->associate($user->id);
+                        $employee->company()->associate($company->id);
+                        $employee->save();
+                    }
+                }
 
-                // shift
-                collect([
-                    [
-                        'start_at' => Carbon::now()->subMonth(),
-                        'end_at' => Carbon::now()->subMonth()->addHours(8),
-                    ],
-                    [
-                        'start_at' => Carbon::now()->subMonth()->addDay(),
-                        'end_at' => Carbon::now()->subMonth()->addDay()->addHours(8),
-                    ],
-                    [
-                        'start_at' => Carbon::now()->subMonth()->addDays(2),
-                        'end_at' => Carbon::now()->subMonth()->addDays(2)->addHours(8)->addMinutes(20),
-                    ],
-                    [
-                        'start_at' => Carbon::now()->subMonth()->addDays(10),
-                        'end_at' => Carbon::now()->subMonth()->addDays(10)->addHours(8)->addSeconds(40),
-                    ],
-                ])->each(function ($shift) use ($employee) {
-                    $shift = new Shift($shift);
-                    $shift->employee()->associate($employee->id);
-                    $shift->save();
-                });
+                // shifts
+                $employees = Employee::all();
+                foreach ($employees as $employee) {
+                    // shift
+                    collect([
+                        [
+                            'start_at' => Carbon::now()->subMonth(),
+                            'end_at' => Carbon::now()->subMonth()->addHours(8),
+                        ],
+                        [
+                            'start_at' => Carbon::now()->subMonth()->addDay(),
+                            'end_at' => Carbon::now()->subMonth()->addDay()->addHours(8),
+                        ],
+                        [
+                            'start_at' => Carbon::now()->subMonth()->addDays(2),
+                            'end_at' => Carbon::now()->subMonth()->addDays(2)->addHours(8)->addMinutes(20),
+                        ],
+                        [
+                            'start_at' => Carbon::now()->subMonth()->addDays(10),
+                            'end_at' => Carbon::now()->subMonth()->addDays(10)->addHours(8)->addSeconds(40),
+                        ],
+                    ])->each(function ($shift) use ($employee) {
+                        $shift = new Shift($shift);
+                        $shift->employee()->associate($employee->id);
+                        $shift->save();
+                    });
+                }
 
                 // salaries
-                collect([
-                    [
-                        'month' => 1,
-                        'net_payment' => 20000,
-                    ],
-                    [
-                        'month' => 2,
-                        'net_payment' => 21000,
-                    ],
-                    [
-                        'month' => 3,
-                        'net_payment' => 22000,
-                    ],
-                    [
-                        'month' => 4,
-                        'net_payment' => 20000,
-                    ],
-                    [
-                        'month' => 6,
-                        'net_payment' => 20000,
-                    ],
-                ])->each(function ($salary) use ($employee) {
-                    $salary = new Salary($salary);
-                    $salary->employee()->associate($employee->id);
-                    $salary->save();
-                });
+                foreach ($employees as $employee) {
+                    $salariesCount = rand(10, 20);
+                    for ($i = 0; $i < $salariesCount; $i++) {
+                        $salary = new Salary([
+                            'month' => fake()->numberBetween(1, 12),
+                            'net_payment' => fake()->numberBetween(20000, 30000),
+                        ]);
+                        $salary->employee()->associate($employee->id);
+                        $salary->save();
+                    }
+                }
             });
         }
     }

@@ -5,8 +5,8 @@ namespace App\Filament\Widgets;
 use App\Enums\UserType;
 use App\Models\Employee;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 class MostHardworkingEmployees extends BaseWidget
@@ -18,23 +18,24 @@ class MostHardworkingEmployees extends BaseWidget
         return auth()->user()->type->value === UserType::COMPANY->value;
     }
 
-    protected function getTableQuery(): Builder
+    public function table(Table $table): Table
     {
-        return Employee::query()
-            ->whereHas('shifts')
-            ->select('*', DB::raw('(SELECT SUM(TIME_TO_SEC(TIMEDIFF(end_at, start_at))) FROM shifts WHERE employee_id = employees.id) as total_working_seconds'))
-            ->orderByDesc('total_working_seconds');
-    }
-
-    protected function getTableColumns(): array
-    {
-        return [
-            Tables\Columns\TextColumn::make('name')
-                ->label('Име'),
-            Tables\Columns\TextColumn::make('surname')
-                ->label('Презиме'),
-            Tables\Columns\TextColumn::make('total_working_hours')
-                ->label('Работни часови'),
-        ];
+        return $table
+            ->query(
+                Employee::query()
+                    ->whereHas('shifts')
+                    ->select('*', DB::raw('(SELECT SUM(TIME_TO_SEC(TIMEDIFF(end_at, start_at))) FROM shifts WHERE employee_id = employees.id) as total_working_seconds'))
+                    ->orderByDesc('total_working_seconds')
+                    ->limit(5)
+            )
+            ->columns([
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Име'),
+                Tables\Columns\TextColumn::make('surname')
+                    ->label('Презиме'),
+                Tables\Columns\TextColumn::make('total_working_hours')
+                    ->label('Работни часови'),
+            ])
+            ->paginated(false);
     }
 }

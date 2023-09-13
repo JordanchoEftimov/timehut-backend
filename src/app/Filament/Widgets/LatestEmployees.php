@@ -5,8 +5,8 @@ namespace App\Filament\Widgets;
 use App\Enums\UserType;
 use App\Models\Employee;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-use Illuminate\Database\Eloquent\Builder;
 
 class LatestEmployees extends BaseWidget
 {
@@ -17,18 +17,18 @@ class LatestEmployees extends BaseWidget
         return auth()->user()->type->value === UserType::COMPANY->value;
     }
 
-    protected function getTableQuery(): Builder
+    public function table(Table $table): Table
     {
-        return Employee::query()->latest();
-    }
-
-    protected function getTableColumns(): array
-    {
-        return [
-            Tables\Columns\TextColumn::make('name')
-                ->label('Име'),
-            Tables\Columns\TextColumn::make('surname')
-                ->label('Презиме'),
-        ];
+        return $table
+            ->query(
+                Employee::query()->latest()->limit(5)
+            )
+            ->columns([
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Име'),
+                Tables\Columns\TextColumn::make('surname')
+                    ->label('Презиме'),
+            ])
+            ->paginated(false);
     }
 }

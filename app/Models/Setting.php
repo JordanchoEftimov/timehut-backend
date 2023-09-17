@@ -17,6 +17,7 @@ class Setting extends Model
     public $timestamps = false;
 
     const PAYMENT_DATE_OF_MONTH_KEY = 'payment_date_of_month';
+
     const STATIC_IP_ADDRESS = 'static_ip_address';
 
     const SETTINGS = [

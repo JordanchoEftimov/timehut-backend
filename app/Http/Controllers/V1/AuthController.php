@@ -32,11 +32,7 @@ class AuthController extends Controller
 
     public function logout(): JsonResponse
     {
-        $user = auth()->user();
-
-        if ($user) {
-            $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
-        }
+        auth()->user()->tokens()->delete();
 
         return response()->json(['message' => 'Успешно се одјавивте!']);
     }

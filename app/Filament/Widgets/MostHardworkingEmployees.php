@@ -23,6 +23,7 @@ class MostHardworkingEmployees extends BaseWidget
         return $table
             ->query(
                 Employee::query()
+                    ->fromAuthCompany()
                     ->whereHas('shifts')
                     ->select('*', DB::raw('(SELECT SUM(TIME_TO_SEC(TIMEDIFF(end_at, start_at))) FROM shifts WHERE employee_id = employees.id) as total_working_seconds'))
                     ->orderByDesc('total_working_seconds')

@@ -23,6 +23,7 @@ class MostPaidEmployees extends BaseWidget
         return $table
             ->query(
                 Employee::query()
+                    ->fromAuthCompany()
                     ->whereHas('salaries')
                     ->select('employees.*', DB::raw('(SELECT SUM(net_payment) FROM salaries WHERE employee_id = employees.id) as total_salary'))
                     ->orderByDesc('total_salary')

@@ -21,7 +21,7 @@ class LatestEmployees extends BaseWidget
     {
         return $table
             ->query(
-                Employee::query()->latest()->limit(5)
+                Employee::query()->fromAuthCompany()->latest()->limit(5)
             )
             ->columns([
                 Tables\Columns\TextColumn::make('name')

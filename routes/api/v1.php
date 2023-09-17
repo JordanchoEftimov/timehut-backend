@@ -29,18 +29,18 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
-    Route::name('shifts.')->prefix('/{employee}/shifts')->group(function () {
+    Route::name('shifts.')->prefix('/shifts')->group(function () {
         Route::post('/start', [ShiftController::class, 'startShift'])->name('start');
         Route::post('/{shift}/end', [ShiftController::class, 'endShift'])->name('end');
         Route::get('/', [ShiftController::class, 'getShifts'])->name('get');
     });
 
-    Route::name('pauses.')->prefix('/{employee}/shifts/{shift}')->group(function () {
+    Route::name('pauses.')->prefix('/shifts/{shift}')->group(function () {
         Route::post('/start', [PauseController::class, 'startPause'])->name('start');
         Route::post('/{pause}/end', [PauseController::class, 'endPause'])->name('end');
     });
 
-    Route::name('salaries.')->prefix('/{employee}/salaries')->group(function () {
+    Route::name('salaries.')->prefix('/salaries')->group(function () {
         Route::get('/', [SalaryController::class, 'getSalaries'])->name('get');
     });
 });

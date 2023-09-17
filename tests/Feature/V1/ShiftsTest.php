@@ -35,17 +35,6 @@ it('can get own shifts when authenticated', function () {
         ]);
 });
 
-it('cannot get another user\'s shifts when authenticated', function () {
-    $user = User::factory()->has(Employee::factory())->create();
-    $anotherUser = User::factory()->has(Employee::factory())->create();
-    Sanctum::actingAs($anotherUser);
-    $employee = Employee::query()->firstWhere('user_id', $user->id);
-
-    $response = $this->getJson(route('v1.shifts.get', $employee));
-
-    $response->assertForbidden();
-});
-
 it('can start a shift if the user is an employee', function () {
     $user = User::factory()->has(Employee::factory())->create();
     Sanctum::actingAs($user);

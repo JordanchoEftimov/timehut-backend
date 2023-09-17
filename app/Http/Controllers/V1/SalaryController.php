@@ -9,9 +9,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class SalaryController extends Controller
 {
-    public function getSalaries(Employee $employee): AnonymousResourceCollection
+    public function getSalaries(): AnonymousResourceCollection
     {
-        abort_if($employee->user_id !== auth()->id(), 403);
+        $employee = Employee::query()->firstWhere('user_id', auth()->id());
         $salaries = $employee->salaries()
             ->paginate(10);
 

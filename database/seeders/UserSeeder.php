@@ -29,14 +29,64 @@ class UserSeeder extends Seeder
                 'type' => UserType::ADMIN->value,
             ]);
 
-        // seed one test employee user in production
-        User::query()
+        // seed just one for test in production
+        // company
+        $user = User::query()
+            ->create([
+                'name' => 'Autowelt',
+                'email' => 'info@autowelt.mk',
+                'password' => 'admin',
+                'type' => UserType::COMPANY->value,
+            ]);
+        $company = new Company([
+            'name' => 'Autowelt',
+            'address' => 'ul. Teodosija Paunov',
+        ]);
+        $company->user()->associate($user->id);
+        $company->save();
+
+        $user = User::query()
             ->create([
                 'name' => 'Jordancho Eftimov',
                 'email' => 'jocka@gmail.com',
                 'password' => 'jocka',
                 'type' => UserType::EMPLOYEE->value,
             ]);
+        $employee = new Employee([
+            'name' => 'Jordancho',
+            'surname' => 'Eftimov',
+            'phone' => fake()->phoneNumber,
+            'address' => fake()->address,
+            'employment_date' => Carbon::now(),
+            'net_salary' => fake()->numberBetween(20000, 30000),
+            'previous_work_months' => fake()->numberBetween(0, 96),
+        ]);
+        $employee->user()->associate($user->id);
+        $employee->company()->associate($company->id);
+        $employee->save();
+
+        collect([
+            [
+                'start_at' => Carbon::now()->subMonth(),
+                'end_at' => Carbon::now()->subMonth()->addHours(8),
+            ],
+            [
+                'start_at' => Carbon::now()->subMonth()->addDay(),
+                'end_at' => Carbon::now()->subMonth()->addDay()->addHours(8),
+            ],
+            [
+                'start_at' => Carbon::now()->subMonth()->addDays(2),
+                'end_at' => Carbon::now()->subMonth()->addDays(2)->addHours(8)->addMinutes(20),
+            ],
+            [
+                'start_at' => Carbon::now()->subMonth()->addDays(10),
+                'end_at' => Carbon::now()->subMonth()->addDays(10)->addHours(8)->addSeconds(40),
+            ],
+        ])->each(function ($shift) use ($employee) {
+            $shift = new Shift($shift);
+            $shift->employee()->associate($employee->id);
+            $shift->save();
+        });
 
         if (! app()->isProduction()) {
             DB::transaction(function () {

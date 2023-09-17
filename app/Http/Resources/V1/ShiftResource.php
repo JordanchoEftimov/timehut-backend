@@ -16,8 +16,10 @@ class ShiftResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'start_at' => $this->start_at,
-            'end_at' => $this->end_at,
+            'day' => $this->day,
+            'date' => $this->start_at->format('d/m/Y'),
+            'startTime' => $this->start_at->format('H:i'),
+            'endTime' => $this->end_at->format('H:i'),
             'duration' => $this->duration,
         ];
     }

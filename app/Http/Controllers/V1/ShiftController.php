@@ -44,9 +44,9 @@ class ShiftController extends Controller
     /**
      * @throws AuthorizationException
      */
-    public function getShifts(Employee $employee): AnonymousResourceCollection
+    public function getShifts(): AnonymousResourceCollection
     {
-        abort_if($employee->user_id !== auth()->id(), 403);
+        $employee = Employee::query()->firstWhere('user_id', auth()->id());
 
         $shifts = $employee->shifts()
             ->paginate(10);

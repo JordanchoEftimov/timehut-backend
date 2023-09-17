@@ -55,8 +55,8 @@ class UserSeeder extends Seeder
         $employee = new Employee([
             'name' => 'Jordancho',
             'surname' => 'Eftimov',
-            'phone' => fake()->phoneNumber,
-            'address' => fake()->address,
+            'phone' => '077123123',
+            'address' => 'Fake Address',
             'employment_date' => Carbon::now(),
             'net_salary' => fake()->numberBetween(20000, 30000),
             'previous_work_months' => fake()->numberBetween(0, 96),

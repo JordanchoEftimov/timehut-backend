@@ -29,6 +29,15 @@ class UserSeeder extends Seeder
                 'type' => UserType::ADMIN->value,
             ]);
 
+        // seed one test employee user in production
+        User::query()
+            ->create([
+                'name' => 'Jordancho Eftimov',
+                'email' => 'jocka@gmail.com',
+                'password' => 'jocka',
+                'type' => UserType::EMPLOYEE->value,
+            ]);
+
         if (! app()->isProduction()) {
             DB::transaction(function () {
                 // create 100 companies

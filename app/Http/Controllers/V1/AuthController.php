@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\LoginRequest;
 use App\Http\Resources\V1\UserResource;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -27,5 +28,16 @@ class AuthController extends Controller
 
         return UserResource::make($user)
             ->additional(['token' => $token]);
+    }
+
+    public function logout(): JsonResponse
+    {
+        $user = auth()->user();
+
+        if ($user) {
+            $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
+        }
+
+        return response()->json(['message' => 'Успешно се одјавивте!']);
     }
 }

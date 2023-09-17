@@ -58,8 +58,8 @@ class UserSeeder extends Seeder
             'phone' => '077123123',
             'address' => 'Fake Address',
             'employment_date' => Carbon::now(),
-            'net_salary' => fake()->numberBetween(20000, 30000),
-            'previous_work_months' => fake()->numberBetween(0, 96),
+            'net_salary' => '90000',
+            'previous_work_months' => '24',
         ]);
         $employee->user()->associate($user->id);
         $employee->company()->associate($company->id);

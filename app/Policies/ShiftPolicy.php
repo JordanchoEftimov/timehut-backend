@@ -61,12 +61,8 @@ class ShiftPolicy
         return $user->type->value === UserType::EMPLOYEE->value;
     }
 
-    public function endShift(User $user, Shift $shift): bool
+    public function endShift(User $user): bool
     {
-        if ($shift->employee_id !== $user->employee->id) {
-            return false;
-        }
-
         return $user->type->value === UserType::EMPLOYEE->value;
     }
 }

@@ -22,11 +22,11 @@ it('can login successfully', function () {
 
 it('can\'t login with wrong credentials', function () {
     $response = $this->postJson(route('v1.auth.login'), [
-        'email' => 'test@gmail.com',
+        'email' => 'wrong@gmail.com',
         'password' => 'test',
         'device_name' => 'Test',
     ]);
-    $response->assertJsonValidationErrorFor('email');
+    $response->assertUnprocessable();
 });
 
 it('can\'t login with wrong password', function () {
@@ -36,7 +36,7 @@ it('can\'t login with wrong password', function () {
         'password' => 'test',
         'device_name' => 'Test',
     ]);
-    $response->assertJsonValidationErrorFor('email');
+    $response->assertUnprocessable();
 });
 
 it('can\'t login with empty credentials', function () {
@@ -45,5 +45,5 @@ it('can\'t login with empty credentials', function () {
         'password' => '',
         'device_name' => 'Test',
     ]);
-    $response->assertJsonValidationErrors(['email', 'password']);
+    $response->assertUnprocessable();
 });

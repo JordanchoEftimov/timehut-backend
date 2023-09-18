@@ -31,10 +31,13 @@ class ShiftController extends Controller
     /**
      * @throws AuthorizationException
      */
-    public function endShift(Shift $shift): JsonResource
+    public function endShift(): JsonResource
     {
-        $this->authorize('endShift', $shift);
-        abort_if(! $shift->is_active, 403);
+        $this->authorize('endShift', Shift::class);
+        $employee = Employee::query()->firstWhere('user_id', auth()->id());
+        $shift = $employee->activeShift;
+        abort_if(! $shift, 404);
+        abort_if($shift->start_at == null || ! $shift->is_active, 403);
 
         $shift->end_at = now();
         $shift->save();

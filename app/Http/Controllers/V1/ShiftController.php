@@ -50,6 +50,7 @@ class ShiftController extends Controller
         $employee = Employee::query()->firstWhere('user_id', auth()->id());
 
         $shifts = $employee->shifts()
+            ->whereNotNull('end_at')
             ->paginate(10);
 
         return ShiftResource::collection($shifts);
